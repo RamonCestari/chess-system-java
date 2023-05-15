@@ -7,40 +7,68 @@ public class Board {
 
     private Piece[][] pieces;
 
-    public Board(Integer rows, Integer columns) {
-        this.rows = rows;
-        this.columns = columns;
-        pieces = new Piece[rows][columns];
+    public Board(Integer row, Integer column) {
+        if (row < 1 || column < 1) {
+            throw new BoardException("Error Creating Board: There must be at least 1 row and 1 column");
+        } else {
+            this.rows = row;
+            this.columns = column;
+            pieces = new Piece[row][column];
+        }
     }
 
     public Integer getRows() {
         return rows;
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
-    }
-
     public Integer getColumns() {
         return columns;
     }
 
-    public void setColumns(Integer columns) {
-        this.columns = columns;
+    public Piece piece(Integer row, Integer column) {
+        if (!positionExists(row, column)) {
+            throw new BoardException("Position not on the board!");
+        } else {
+            return pieces[row][column];
+        }
     }
 
-    public Piece piece(Integer row, Integer column){
-            return pieces[row][column];
-    }
-    public Piece piece(Position position){
+    public Piece piece(Position position) {
+        if (!positionExistis(position)) {
+            throw new BoardException("Position not on the board!");
+        } else {
             return pieces[position.getRow()][position.getColum()];
+
+        }
     }
 
     public void placePiece(Piece piece, Position position) {
-        pieces[position.getRow()][position.getColum()] = piece;
-        piece.position = position;
+        if (thereIsAPiece(position)) {
+            throw new BoardException("There is already a piece on position " + position + ". Please select another position.");
+        } else {
+            pieces[position.getRow()][position.getColum()] = piece;
+            piece.position = position;
+
+        }
     }
 
+    private boolean positionExists(Integer row, Integer column) {
+        return row >= 0 && row < rows && column >= 0 && column < columns;
+    }
+
+    public boolean positionExistis(Position position) {
+        return positionExists(position.getRow(), position.getColum());
+    }
+
+    public boolean thereIsAPiece(Position position) {
+        if (!positionExistis(position)) {
+            throw new BoardException("Position not on the board!");
+        } else {
+
+            return piece(position) != null;
+        }
+
+    }
 
 
 }
