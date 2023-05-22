@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class UI {
 
@@ -57,6 +56,12 @@ public class UI {
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
         System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+        if (chessMatch.getCheck()){
+            System.out.print(ANSI_YELLOW);
+            System.out.print(ANSI_RED_BACKGROUND);
+            System.out.print("CHECK!");
+            System.out.print(ANSI_RESET);
+        }
 
 
     }
