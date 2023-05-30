@@ -41,6 +41,12 @@ public class Program {
                     capturedPieces.add(capturedPiece);
                }
 
+               if(chessMatch.getPromoted() != null){
+                   System.out.print("For which piece you would like to replace the Pawn: (B/Q/N/R) ");
+                   String type = sc.nextLine();
+                   chessMatch.replacePromotedPiece(type);
+               }
+
 
             } catch (ChessException | InputMismatchException e) {
                 System.out.println(e.getMessage());
