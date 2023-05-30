@@ -37,15 +37,20 @@ public class Program {
 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 
-               if (capturedPiece != null) {
+                if (capturedPiece != null) {
                     capturedPieces.add(capturedPiece);
-               }
+                }
 
-               if(chessMatch.getPromoted() != null){
-                   System.out.print("For which piece you would like to replace the Pawn: (B/Q/N/R) ");
-                   String type = sc.nextLine();
-                   chessMatch.replacePromotedPiece(type);
-               }
+                if (chessMatch.getPromoted() != null) {
+                    System.out.print("For which piece you would like to replace the Pawn: (B/Q/N/R) ");
+                    String type = sc.nextLine().toUpperCase();
+                    while (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")) {
+                        System.out.println("Invalid Piece! Enter a valid Piece: (B/Q/N/R)");
+                        type = sc.nextLine().toUpperCase();
+
+                    }
+                    chessMatch.replacePromotedPiece(type);
+                }
 
 
             } catch (ChessException | InputMismatchException e) {
